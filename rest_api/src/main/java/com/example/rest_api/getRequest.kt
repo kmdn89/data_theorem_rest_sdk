@@ -7,45 +7,29 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import java.io.OutputStreamWriter
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
+fun getRequest(serverDB : AppDatabase) {
 
-fun postData(serverDB : AppDatabase) : AppDatabase {
-
-    val myJsonObject = JSONObject()
-    myJsonObject.put("company", "DataTheorem")
-    myJsonObject.put("Location_1", "Palo Alto")
-    myJsonObject.put("Location_2", "Paris")
-    myJsonObject.put("Location_3", "London")
-
-    val jsonObjectString = myJsonObject.toString()
 
     GlobalScope.launch(Dispatchers.IO) {
 
-        val url = URL("https://httpbin.org/post")
+        val url = URL("https://httpbin.org/get")
         val myHttpsConnection = url.openConnection() as HttpsURLConnection
-
 
         try {
 
-            myHttpsConnection.requestMethod = "POST"
-            myHttpsConnection.setRequestProperty("Content-Type", "application/json")
+            myHttpsConnection.requestMethod = "GET"
             myHttpsConnection.setRequestProperty("Accept", "application/json")
 
             myHttpsConnection.doInput = true
-            myHttpsConnection.doOutput = true
+            myHttpsConnection.doOutput = false
 
-            myHttpsConnection.setChunkedStreamingMode(0)
 
-            val myOutputStream = myHttpsConnection.outputStream
-            val myOutputStreamWriter = OutputStreamWriter(myOutputStream)
-            myOutputStreamWriter.write(jsonObjectString)
-            myOutputStreamWriter.flush()
+
             // Check if  connection is successful
             val myResponseCode = myHttpsConnection.responseCode
 
@@ -55,35 +39,41 @@ fun postData(serverDB : AppDatabase) : AppDatabase {
                 val myInputStream = myHttpsConnection.inputStream
                 // Convert the Byte stream to Character format stream
                 val myInputStreamReader = InputStreamReader(myInputStream)
-
                 // Create a BufferedReader
                 // with default buffer array
                 val myBufferedReader = BufferedReader(myInputStreamReader)
                 // the buffered reader reads all the text provided by inputStream
                 val myResponse = myBufferedReader.readText()
 
-                // we map response data to request table fields
-                val currentData = RequestEntity(
-                    null,
-                    myHttpsConnection.url.toString(),
-                    myHttpsConnection.responseCode)
-                // we use our Dao method to persist data in App Database
-                serverDB.requestDao().insertData(
-                    currentData)
-
-
+                // We create a coroutine to display Response in the UI thread
                 withContext(Dispatchers.Main) {
-
+                    //here we use gson library to pretty print json response
                     val gsonBuilder = GsonBuilder().setPrettyPrinting().create()
                     val myJsonResult = gsonBuilder.toJson(JsonParser.parseString(myResponse))
                     Log.d("Response :", myJsonResult)
-                    Log.d("Response Headers: ", myHttpsConnection.headerFields.toString())
-                    Log.d("Response Code", myHttpsConnection.responseCode.toString())
-                    Log.d("Response Message ", myHttpsConnection.responseMessage)
-                    Log.d("Url : ", myHttpsConnection.url.toString())
+
                 }
 
+                // we map successful response data to request table fields
+                val currentData = RequestEntity(
+                    null,
+                    myHttpsConnection.url.toString(),
+                    myHttpsConnection.responseCode,
+                    myHttpsConnection.requestMethod)
+                // we use our Dao method to persist data in App Database
+                serverDB.requestDao().insertData(currentData)
+
+
             } else {
+                // we map unsuccessful response data to request table fields
+                val currentData = RequestEntity(
+                    null,
+                    myHttpsConnection.url.toString(),
+                    myHttpsConnection.responseCode,
+                    myHttpsConnection.requestMethod)
+                // we use our Dao method to persist data in App Database
+                serverDB.requestDao().insertData(currentData)
+
                 Log.e("HTTPsCONNECTION_ERROR", myResponseCode.toString())
                 Log.e("HTTPsCONNECTION_HEADER", myHttpsConnection.headerFields.toString())
             }
@@ -94,6 +84,6 @@ fun postData(serverDB : AppDatabase) : AppDatabase {
         }
 
     }
-    return serverDB
 
 }
+

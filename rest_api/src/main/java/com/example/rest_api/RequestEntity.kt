@@ -9,5 +9,6 @@ data class RequestEntity(
     @PrimaryKey(autoGenerate = true)
     val requestID : Int?,
     val url : String?,
-    val codeResponse : Int?
+    val codeResponse : Int?,
+    val requestMethod : String?
 )
