@@ -43,23 +43,23 @@ dependencies {
 
 1. Build a new database (if not already done or if needed)
 
-```kotlin
-val db = buildNewDB(this)
-```
+        ```kotlin
+        val db = buildNewDB(this)
+        ```
 
 2.a Make HTTP GET request
 
-```kotlin
-getRequest(db)
-```
+        ```kotlin
+        getRequest(db)
+        ```
 2.b Make HTTP POST request
 
-```kotlin
-postRequest(db)
-```
+        ```kotlin
+        postRequest(db)
+        ```
 
 3. Display History of request onto Console
 
-```kotlin
-displayHistory(db)
-```
+        ```kotlin
+        displayHistory(db)
+        ```
