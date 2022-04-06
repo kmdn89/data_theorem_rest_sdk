@@ -1,21 +1,21 @@
 # data_theorem_rest_sdk
 
 
-A simple HTTP networking library for Kotlin/Android.
+A simple HTTPS networking library for Kotlin/Android.
 
 
 ## Features
 
-- [x] Makes HTTP `GET`/`POST` requests
+- [x] Makes HTTPS `GET`/`POST` requests
 - [x] Makes Network Requests using [coroutines]
-- [x] Build new Database when needed [Room]
-- [x] Persist data into your database
+- [x] Builds new Database when needed [Room]
+- [x] Persists data into your database
 - [x] History of all requests can be displayed onto the console
 
 
 ## SDK Implementation steps : 
 
-1. Add the JitPack repository to your root build file `settings.gradle` by including `maven{ url 'https://jitpack.io'}` in your repositories 
+1. Add the JitPack repository to your root build file `settings.gradle` by including `maven{ url 'https://jitpack.io'}` in your repositories block
 
 ```groovy
 repositories {
@@ -48,21 +48,21 @@ val db = buildNewDB(this)
 ```
 
 
-2. Make HTTP GET request
+2. Make HTTPS GET request
 
 ```kotlin
 getRequest(db)
 ```
 
 
-2. Make HTTP POST request
+2. Make HTTPS POST request
 
 ```kotlin
 postRequest(db)
 ```
 
 
-3. Display History of requests onto Console
+3. Display History of all requests onto Console
 
 ```kotlin
 displayHistory(db)
