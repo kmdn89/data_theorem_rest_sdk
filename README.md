@@ -47,17 +47,20 @@ dependencies {
 val db = buildNewDB(this)
 ```
 
+
 2. Make HTTP GET request
 
 ```kotlin
 getRequest(db)
 ```
 
+
 2. Make HTTP POST request
 
 ```kotlin
 postRequest(db)
 ```
+
 
 3. Display History of requests onto Console
 
