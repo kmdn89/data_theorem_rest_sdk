@@ -59,7 +59,7 @@ getRequest(db)
 postRequest(db)
 ```
 
-3. Display History of request onto Console
+3. Display History of requests onto Console
 
 ```kotlin
 displayHistory(db)
