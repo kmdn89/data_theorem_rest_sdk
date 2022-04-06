@@ -61,7 +61,7 @@ afterEvaluate {
                 from components.release
 
                 groupId = 'com.github.kmdn89'
-                artifactId = 'data-theorem-rest-sdk'
+                artifactId = 'km-rest-sdk'
                 version = '1.0'
             }
         }

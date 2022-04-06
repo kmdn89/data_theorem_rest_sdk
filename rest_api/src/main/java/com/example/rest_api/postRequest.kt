@@ -20,7 +20,7 @@ fun postRequest(serverDB : AppDatabase){
     // Lets create a JSON Object
     val myJsonObject = JSONObject()
     // within which we insert data
-    myJsonObject.put("company", "DataTheorem")
+    myJsonObject.put("company", "DT")
     myJsonObject.put("Location_1", "Palo Alto")
     myJsonObject.put("Location_2", "Paris")
     myJsonObject.put("Location_3", "London")

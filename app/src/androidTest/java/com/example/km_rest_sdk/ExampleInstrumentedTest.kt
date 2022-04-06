@@ -1,4 +1,4 @@
-package com.example.data_theorem_rest_sdk
+package com.example.km_rest_sdk
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

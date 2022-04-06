@@ -6,6 +6,6 @@ dependencyResolutionManagement {
         jcenter() // Warning: this repository is going to shut down soon
     }
 }
-rootProject.name = "data_theorem_rest_sdk"
+rootProject.name = "km_rest_sdk"
 include ':app'
 include ':rest_api'
