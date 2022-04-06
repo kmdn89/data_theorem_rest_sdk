@@ -32,7 +32,7 @@ repositories {
 ```groovy
 dependencies {
 
-        implementation 'com.github.kmdn89:data_theorem_rest_sdk:Tag'
+      implementation 'com.github.kmdn89:km_rest_sdk:1.0.1'
 
 }
 ```
