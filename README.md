@@ -15,7 +15,7 @@ A simple HTTP networking library for Kotlin/Android.
 
 ## SDK Implementation steps : 
 
-1. Add the JitPack repository to your build file `settings.gradle` by including `maven{ url 'https://jitpack.io'}` in your repositories 
+1. Add the JitPack repository to your root build file `settings.gradle` by including `maven{ url 'https://jitpack.io'}` in your repositories 
 
 ```groovy
 repositories {
