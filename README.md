@@ -47,12 +47,13 @@ dependencies {
         val db = buildNewDB(this)
         ```
 
-2.a Make HTTP GET request
+2. Make HTTP GET request
 
         ```kotlin
         getRequest(db)
         ```
-2.b Make HTTP POST request
+
+2. Make HTTP POST request
 
         ```kotlin
         postRequest(db)
